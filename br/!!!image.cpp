@@ -1,0 +1,48 @@
+#include "!!!image.h"
+#include "opencv2/imgproc/imgproc.hpp"
+#include <opencv2/highgui/highgui.hpp>
+#include <iostream>
+
+using namespace cv;
+using namespace std;
+
+void MyImage::SetCamera(VideoCapture cam) {
+	camera = cam;
+}
+
+bool MyImage::GetImageFromCamera()
+{
+	bool read = camera.read(img_raw);
+	if (!read)
+	{
+		cout << "Could not read from camera." << endl;
+		return false;
+	}
+}
+
+Mat MyImage::GetROI()
+{
+	GetImageFromCamera();
+	Rect rect = Rect(img_raw.size().width / 4.7, img_raw.size().height / 15, img_raw.size().height / 1.5, img_raw.size().width / 2);
+	img_raw_roi = img_raw(rect);
+	ThresholdRawImage();
+	return img_raw_roi;
+}
+
+void MyImage::ThresholdRawImage() 
+{
+	blur(img_raw_roi, img_raw_roi, Size(3, 3));
+
+	//convert and threshold image
+	cvtColor(img_raw_roi, img_converted, COLOR_BGR2YCrCb);
+	//YCrCb skin
+	inRange(img_converted, Scalar(80, 133, 77), Scalar(179, 173, 127), img_thresholded);												
+
+	//morphological opening (remove small objects from the foreground)
+	erode(img_thresholded, img_thresholded, getStructuringElement(MORPH_ELLIPSE, Size(6, 6)));
+	dilate(img_thresholded, img_thresholded, getStructuringElement(MORPH_ELLIPSE, Size(6, 6)));
+
+	//morphological closing (fill small holes in the foreground)
+	dilate(img_thresholded, img_thresholded, getStructuringElement(MORPH_ELLIPSE, Size(6, 6)));
+	erode(img_thresholded, img_thresholded, getStructuringElement(MORPH_ELLIPSE, Size(6, 6)));
+}
