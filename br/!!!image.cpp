@@ -10,7 +10,7 @@ void MyImage::SetCamera(VideoCapture cam) {
 	camera = cam;
 }
 
-bool MyImage::GetImageFromCamera()
+bool MyImage::ImageFromCamera()
 {
 	bool read = camera.read(img_raw);
 	if (!read)
@@ -20,15 +20,17 @@ bool MyImage::GetImageFromCamera()
 	}
 }
 
-Mat MyImage::GetROI()
+void MyImage::ROI()
 {
-	GetImageFromCamera();
 	Rect rect = Rect(img_raw.size().width / 4.7, img_raw.size().height / 15, img_raw.size().height / 1.5, img_raw.size().width / 2);
-	img_raw_roi = img_raw(rect);
-	ThresholdRawImage();
-	return img_raw_roi;
+	img_raw_roi = img_raw(rect);	
 }
 
+void MyImage::Setup() {
+	ImageFromCamera();
+	ROI();
+	ThresholdRawImage();
+}
 void MyImage::ThresholdRawImage() 
 {
 	blur(img_raw_roi, img_raw_roi, Size(3, 3));
@@ -45,4 +47,8 @@ void MyImage::ThresholdRawImage()
 	//morphological closing (fill small holes in the foreground)
 	dilate(img_thresholded, img_thresholded, getStructuringElement(MORPH_ELLIPSE, Size(6, 6)));
 	erode(img_thresholded, img_thresholded, getStructuringElement(MORPH_ELLIPSE, Size(6, 6)));
+}
+
+Size MyImage::getImgSize() {
+	return img_raw_roi.size();
 }

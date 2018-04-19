@@ -9,12 +9,15 @@ using namespace std;
 
 Draw::Draw(ImageProcess &img_process) {
 	 this->img_process = img_process; 
+	 drawing = Mat::zeros(MyImage::A.getImgsize(), CV_8UC3);
+
 }
 
 void Draw::DrawContour() {
-	if (img_process.IndexOfBiggestContour() > -1)
-		//polylines(drawing, img_process.GetBiggestContour(), true, Scalar(255, 255, 255), 2, 8, 0);
-		drawContours(drawing, img_process.GetBiggestContour(), img_process.IndexOfBiggestContour(), Scalar(255, 255, 255), 2, 8, img_process.GetHierarchy(), 0, Point());
+	int a = img_process.IndexOfBiggestContour();
+	if (a > -1)
+		//polylines(ken, img_process.GetBiggestContour(), true, Scalar(255, 255, 255), 2, 8, 0);
+		drawContours(drawing, img_process.contours, a, Scalar(255, 255, 255), 2, 8, img_process.hierarchy, 0, Point());
 
 }
 

@@ -19,7 +19,8 @@ int main() {
 	MyImage img;
 	img.SetCamera(camera);
 	while (true) {
-		Mat img_roi = img.GetROI(); //apply threshold
+		img.Setup();
+		Mat img_roi = img.GetROI();
 		Mat img_converted = img.GetConvertedImage(); //these are just for imshow
 		Mat img_thresholded = img.GetThresholdedImage();
 
@@ -33,7 +34,7 @@ int main() {
 		imshow("roi", img_roi);
 		imshow("converted", img_converted);
 		imshow("thresholded", img_thresholded);
-		//imshow("drw", drw);
+		imshow("drw", drw);
 		if (waitKey(30) == 27) {
 			cout << "User has pressed Esc." << endl;
 			return -1;
