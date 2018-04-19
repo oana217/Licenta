@@ -104,7 +104,7 @@ int main() {
 
 		Mat drawing = Mat::zeros(img_raw_roi.size(), CV_8UC3);
 
-		//draw defect points
+		//draw defect points si filtrare
 		for (int i = 0; i < contours.size(); i++)
 		{
 			size_t count = contours[i].size();

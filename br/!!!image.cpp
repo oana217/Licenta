@@ -49,6 +49,6 @@ void MyImage::ThresholdRawImage()
 	erode(img_thresholded, img_thresholded, getStructuringElement(MORPH_ELLIPSE, Size(6, 6)));
 }
 
-Size MyImage::getImgSize() {
+/*Size MyImage::getImgSize() {
 	return img_raw_roi.size();
-}
+}*/

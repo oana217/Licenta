@@ -18,18 +18,30 @@ ImageProcess::ImageProcess(Mat &img_thresholded)
 void ImageProcess::ExtractContour()
 {
 	findContours(img_thresholded, contours, hierarchy, CV_RETR_EXTERNAL, CV_CHAIN_APPROX_SIMPLE, Point(0, 0));
+	hulls.size = contours.size();
+	hullsI.size = contours.size(); //indices to contour points 
+	defects.size = contours.size();
+
+	boundRect.size = contours.size();
+	contours_poly.size = contours.size();
 }
 
-void ImageProcess::ExtractApproxContour()
+void ImageProcess::ExtractData()
 {
 	ExtractContour();
-	/*int indexOfBiggestContour = IndexOfBiggestContour();
+	int indexOfBiggestContour = IndexOfBiggestContour();
 	if (indexOfBiggestContour > -1)
 	{
 		//approxPolyDP(Mat(contours[indexOfBiggestContour]), contours_poly[indexOfBiggestContour], 3, true);
+		convexHull(Mat(contours[indexOfBiggestContour]), hulls[indexOfBiggestContour], false);
+		convexHull(Mat(contours[indexOfBiggestContour]), hullsI[indexOfBiggestContour], false);
 
-		approxPolyDP(contours[indexOfBiggestContour], contours_poly[indexOfBiggestContour], 3, true);
-	}*/
+		if (hullsI[indexOfBiggestContour].size() > 3)
+			convexityDefects(contours[indexOfBiggestContour], hullsI[indexOfBiggestContour], defects[indexOfBiggestContour]);
+
+		approxPolyDP(Mat(contours[indexOfBiggestContour]), contours_poly[indexOfBiggestContour], 3, true);
+		boundRect[indexOfBiggestContour] = boundingRect(Mat(contours_poly[indexOfBiggestContour]));
+	}
 }
 
 int ImageProcess::IndexOfBiggestContour()

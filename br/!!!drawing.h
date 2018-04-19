@@ -11,7 +11,7 @@ using namespace std;
 class Draw {
 public:
 	Draw(ImageProcess &img_process);
-	void DrawContour();
+	void DrawData();
 	Mat GetDrawing() { return drawing; }
 private:
 	ImageProcess img_process;

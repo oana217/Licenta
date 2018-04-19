@@ -18,7 +18,7 @@ public:
 private:
 	VideoCapture camera;
 	Mat img_raw;
-	static Mat img_raw_roi;
+	Mat img_raw_roi;
 	Mat img_converted;
 	Mat img_thresholded;
 	void ThresholdRawImage();

@@ -25,10 +25,10 @@ int main() {
 		Mat img_thresholded = img.GetThresholdedImage();
 
 		ImageProcess img_processed(img_thresholded);
-		img_processed.ExtractApproxContour();
+		img_processed.ExtractData();
 
 		Draw img_draw(img_processed);
-		img_draw.DrawContour();
+		img_draw.DrawData();
 
 		Mat drw = img_draw.GetDrawing();
 		imshow("roi", img_roi);

@@ -12,20 +12,31 @@ class ImageProcess {
 public:
 	ImageProcess();
 	ImageProcess(Mat &img_thresholded);
-	void ExtractApproxContour();
+	void ExtractData();
+	Mat img_thresholded;
 
-	//vector<vector<Point>> GetBiggestContour() { return contours_poly; }
-	int IndexOfBiggestContour();
+	vector<vector<Point>> GetApproxContour() { return contours_poly; }
+	vector<vector<Point>> GetContours() { return contours; }
 	vector<Vec4i> GetHierarchy() { return hierarchy; }
-	//int GetDefects();
-	//int GetBoundingBox();
+
+	int IndexOfBiggestContour();
+	vector<vector<Point>> GetHulls() { return hulls; }
+	vector<vector<int>> GetHullsI() { return hullsI; }
+	vector<vector<Vec4i>>  GetDefects() { return defects; }
+	vector<Rect> GetBoundingBox() { return boundRect; }
 	
 	
 private:
-	Mat img_thresholded;
-	vector<vector<Point>> contours_poly;
 	vector<vector<Point>> contours;
+	vector<vector<Point>> contours_poly;
 	vector<Vec4i> hierarchy;
+
+	vector<vector<Point>> hulls;
+	vector<vector<int>> hullsI; //indices to contour points 
+	vector<vector<Vec4i>> defects;
+
+	vector<Rect> boundRect;
+
 	void ExtractContour();
 };
 
