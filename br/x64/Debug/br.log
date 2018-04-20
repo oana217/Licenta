@@ -1,16 +1,7 @@
-﻿  !!!processing.cpp
-c:\users\osaman\documents\visual studio 2015\projects\licenta\br\!!!processing.cpp(21): error C2659: '=': function as left operand
-c:\users\osaman\documents\visual studio 2015\projects\licenta\br\!!!processing.cpp(22): error C2659: '=': function as left operand
-c:\users\osaman\documents\visual studio 2015\projects\licenta\br\!!!processing.cpp(23): error C2659: '=': function as left operand
-c:\users\osaman\documents\visual studio 2015\projects\licenta\br\!!!processing.cpp(25): error C2659: '=': function as left operand
-c:\users\osaman\documents\visual studio 2015\projects\licenta\br\!!!processing.cpp(26): error C2659: '=': function as left operand
-c:\users\osaman\documents\visual studio 2015\projects\licenta\br\!!!processing.cpp(53): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
+﻿  !!!main.cpp
   Generating Code...
-  Compiling...
+  Skipping... (no relevant changes detected)
   !!!drawing.cpp
-  Generating Code...
-cl : Command line warning D9028: minimal rebuild failure, reverting to normal build
-  Compiling...
-  !!!main.cpp
-c:\users\osaman\documents\visual studio 2015\projects\licenta\br\!!!main.cpp : fatal error C1041: cannot open program database 'C:\Users\osaman\Documents\visual studio 2015\Projects\Licenta\br\x64\Debug\vc140.pdb'; if multiple CL.EXE write to the same .PDB file, please use /FS
-  Generating Code...
+  !!!decision.cpp
+  br.vcxproj -> C:\Users\osaman\Documents\visual studio 2015\Projects\Licenta\x64\Debug\br.exe
+  br.vcxproj -> C:\Users\osaman\Documents\visual studio 2015\Projects\Licenta\x64\Debug\br.pdb (Full PDB)

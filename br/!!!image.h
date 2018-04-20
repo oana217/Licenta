@@ -14,7 +14,7 @@ public:
 	Mat GetThresholdedImage() { return img_thresholded; }
 	Mat GetConvertedImage() { return img_converted; }
 	Mat GetROI() { return img_raw_roi; }
-	static Size getImgSize();
+	//static Size getImgSize();
 private:
 	VideoCapture camera;
 	Mat img_raw;

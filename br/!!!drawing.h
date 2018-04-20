@@ -12,9 +12,14 @@ class Draw {
 public:
 	Draw(ImageProcess &img_process);
 	void DrawData();
+	void DrawGesture(int &gestureIndex);
 	Mat GetDrawing() { return drawing; }
+	vector<string> GetGestures() { return gestures; }
+	void SetGestureIndex(int &gestureIndex);
 private:
 	ImageProcess img_process;
+	int gestureIndex;
+	vector<string> gestures;
 	Mat drawing;
 	
 };

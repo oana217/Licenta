@@ -121,5 +121,8 @@
     <ClInclude Include="!!!drawing.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="!!!decision.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

@@ -175,7 +175,7 @@ int main() {
 			//putText(drawing, txt, pt1, FONT_HERSHEY_COMPLEX_SMALL, 2, (255, 255, 255), 2, 8);
 			
 			//gesture detection
-			if (noOfDefects == 0)
+			if (noOfDefects == 0) //if no fingers detected
 			{
 				float box_area = boundRect[indexOfBiggestContour].area();
 				float contour_area = contourArea(hulls[indexOfBiggestContour]);
