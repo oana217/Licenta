@@ -12,6 +12,7 @@ using namespace cv;
 using namespace std;
 
 int main() {
+
 	int count = 0;
 	int prevGestureIndex = 0;
 	int validGestureIndex = 0;
@@ -27,7 +28,7 @@ int main() {
 	while (true) {
 		/*INPUT ip;
 
-		// Pause for 5 seconds.
+		// Pause for 1 second.
 		Sleep(1000);
 
 		// Set up a generic keyboard event.
@@ -41,7 +42,7 @@ int main() {
 		ip.ki.dwFlags = 0; // 0 for key press
 		SendInput(1, &ip, sizeof(INPUT));
 
-		// Release the "A" key
+		// Release the "UP" key
 		ip.ki.dwFlags = KEYEVENTF_KEYUP; // KEYEVENTF_KEYUP for key release
 		SendInput(1, &ip, sizeof(INPUT));*/
 
@@ -58,10 +59,10 @@ int main() {
 		Decision decision(img_processed);
 		decision.DecideGesture();
 		int gestureIndex = decision.GetGestureIndex();
-		if (gestureIndex >= 1) {
+		/*if (gestureIndex >= 1) {
 			if (gestureIndex == prevGestureIndex) {
 				count++;
-				//img_draw.DrawGesture(gestureIndex);
+				
 			}
 			else {
 				count = 0;
@@ -69,13 +70,16 @@ int main() {
 			prevGestureIndex = gestureIndex;
 
 		}
+		else {
+			validGestureIndex = 0;
+		}
 		if (count == 10) {
 			//img_draw.SetGestureIndex(gestureIndex);
 			validGestureIndex = gestureIndex;
 			count = 0;
-		}
-		img_draw.DrawGesture(validGestureIndex);
-		//validGestureIndex = 0;
+		}*/
+		img_draw.DrawGesture(gestureIndex);
+		//img_draw.DrawGesture(validGestureIndex);
 		img_draw.DrawData();
 		Mat drw = img_draw.GetDrawing();
 

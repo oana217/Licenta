@@ -39,7 +39,9 @@ void ImageProcess::ProcessContours()
 			convexityDefects(contours[indexOfBiggestContour], hullsI[indexOfBiggestContour], defects[indexOfBiggestContour]);
 
 		approxPolyDP(Mat(contours[indexOfBiggestContour]), contours_poly[indexOfBiggestContour], 3, true);
-		boundRect[indexOfBiggestContour] = boundingRect(Mat(contours_poly[indexOfBiggestContour]));
+		//boundRect[indexOfBiggestContour] = boundingRect(Mat(contours_poly[indexOfBiggestContour]));
+		boundRect[indexOfBiggestContour] = minAreaRect(Mat(contours_poly[indexOfBiggestContour]));
+
 	}
 }
 
