@@ -75,9 +75,6 @@
     <ClCompile Include="!!!decision.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="!!!utilities.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="!!!image.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>

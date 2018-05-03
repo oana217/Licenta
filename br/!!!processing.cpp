@@ -2,7 +2,8 @@
 #include "opencv2/imgproc/imgproc.hpp"
 #include <opencv2/highgui/highgui.hpp>
 #include <iostream>
-
+#include <chrono>
+#include <ctime>
 using namespace cv;
 using namespace std;
 ImageProcess::ImageProcess()
@@ -28,20 +29,22 @@ void ImageProcess::ExtractContour()
 
 void ImageProcess::ProcessContours()
 {
-	int indexOfBiggestContour = IndexOfBiggestContour();
-	if (indexOfBiggestContour > -1)
+	int i = IndexOfBiggestContour();
+	if (i > -1)
 	{
-		//approxPolyDP(Mat(contours[indexOfBiggestContour]), contours_poly[indexOfBiggestContour], 3, true);
-		convexHull(Mat(contours[indexOfBiggestContour]), hulls[indexOfBiggestContour], false);
-		convexHull(Mat(contours[indexOfBiggestContour]), hullsI[indexOfBiggestContour], false);
+		size_t count = contours[i].size(); 
+		if (count > 100) {
+			//approxPolyDP(Mat(contours[i]), contours_poly[i], 3, true);
+			convexHull(Mat(contours[i]), hulls[i], false);
+			convexHull(Mat(contours[i]), hullsI[i], false);
 
-		if (hullsI[indexOfBiggestContour].size() > 3)
-			convexityDefects(contours[indexOfBiggestContour], hullsI[indexOfBiggestContour], defects[indexOfBiggestContour]);
+			if (hullsI[i].size() > 3)
+				convexityDefects(contours[i], hullsI[i], defects[i]);
 
-		approxPolyDP(Mat(contours[indexOfBiggestContour]), contours_poly[indexOfBiggestContour], 3, true);
-		//boundRect[indexOfBiggestContour] = boundingRect(Mat(contours_poly[indexOfBiggestContour]));
-		boundRect[indexOfBiggestContour] = minAreaRect(Mat(contours_poly[indexOfBiggestContour]));
-
+			approxPolyDP(Mat(contours[i]), contours_poly[i], 3, true);
+			boundRect[i] = boundingRect(Mat(contours_poly[i]));
+			isValid = true;
+		}
 	}
 }
 
@@ -51,8 +54,9 @@ void ImageProcess::FilterDefects() {
 	noOfDefects = 0;
 	if (i > -1) {
 		size_t count = contours[i].size();
-		std::cout << "Count : " << count << std::endl;
-		if (count > 200) {
+		if (count > 100) {
+			//std::cout << "Count : " << count << std::endl;
+
 
 			vector<Vec4i>::iterator d = defects[i].begin();
 			while (d != defects[i].end())
@@ -68,9 +72,9 @@ void ImageProcess::FilterDefects() {
 					int faridx = v[2];
 					Point ptFar(contours[i][faridx]); // the farthest from the convex hull point within the defect
 
-					if (GetDistance(ptStart, ptFar) > boundRect[i].height / 5 //finger length must be bigger than 20% of the box
-						&& GetDistance(ptEnd, ptFar) > boundRect[i].height / 5
-						&& GetAngle(ptStart, ptFar, ptEnd) < 100) //angle between fingers must be less than 90 degrees
+					if (GetDistance(ptStart, ptFar) > boundRect[i].height / 4 //finger length must be bigger than 20% of the box
+						&& GetDistance(ptEnd, ptFar) > boundRect[i].height / 4
+						&& GetAngle(ptStart, ptFar, ptEnd) < 135) //angle between fingers must be less than 120 degrees
 					{
 						vector<Point> finger_points;
 						finger_points.push_back(ptStart);

@@ -1,13 +1,8 @@
-﻿  !!skin2.cpp
-c:\users\osaman\documents\visual studio 2015\projects\licenta\br\!!skin2.cpp(62): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
-c:\users\osaman\documents\visual studio 2015\projects\licenta\br\!!skin2.cpp(130): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
-c:\users\osaman\documents\visual studio 2015\projects\licenta\br\!!skin2.cpp(189): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
-c:\users\osaman\documents\visual studio 2015\projects\licenta\br\!!skin2.cpp(190): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
-c:\users\osaman\documents\visual studio 2015\projects\licenta\br\!!skin2.cpp(300): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
-c:\users\osaman\documents\visual studio 2015\projects\licenta\br\!!skin2.cpp(310): warning C4244: 'return': conversion from 'double' to 'float', possible loss of data
-c:\users\osaman\documents\visual studio 2015\projects\licenta\br\!!skin2.cpp(317): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
-c:\users\osaman\documents\visual studio 2015\projects\licenta\br\!!skin2.cpp(319): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-c:\users\osaman\documents\visual studio 2015\projects\licenta\br\!!skin2.cpp(325): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
-c:\users\osaman\documents\visual studio 2015\projects\licenta\br\!!skin2.cpp(326): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-  br.vcxproj -> C:\Users\osaman\Documents\visual studio 2015\Projects\Licenta\x64\Debug\br.exe
-  br.vcxproj -> C:\Users\osaman\Documents\visual studio 2015\Projects\Licenta\x64\Debug\br.pdb (Full PDB)
+﻿  !!!main.cpp
+c:\users\osaman\documents\visual studio 2015\projects\licenta\br\!!!main.cpp : fatal error C1041: cannot open program database 'C:\Users\osaman\Documents\visual studio 2015\Projects\Licenta\br\x64\Debug\vc140.idb'; if multiple CL.EXE write to the same .PDB file, please use /FS
+  !!!decision.cpp
+c:\users\osaman\documents\visual studio 2015\projects\licenta\br\!!!decision.cpp(28): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
+c:\users\osaman\documents\visual studio 2015\projects\licenta\br\!!!decision.cpp(29): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+  Generating Code...
+  Skipping... (no relevant changes detected)
+  !!!drawing.cpp

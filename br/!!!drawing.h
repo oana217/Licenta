@@ -4,6 +4,7 @@
 #include "opencv2/imgproc/imgproc.hpp"
 #include <opencv2/highgui/highgui.hpp>
 #include "!!!processing.h"
+#include <fstream>
 
 using namespace cv;
 using namespace std;
@@ -16,6 +17,7 @@ public:
 	Mat GetDrawing() { return drawing; }
 	vector<string> GetGestures() { return gestures; }
 	void SetGestureIndex(int &gestureIndex);
+	//ofstream myfile;
 private:
 	ImageProcess img_process;
 	int gestureIndex;

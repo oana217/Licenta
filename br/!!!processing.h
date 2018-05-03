@@ -30,6 +30,7 @@ public:
 	float GetDistance(Point a, Point b);
 	float GetAngle(Point s, Point f, Point e);
 	float GetAngleXAxis(Point s, Point e);
+	bool isValid = false;
 	
 private:
 	vector<vector<Point>> contours;

@@ -12,11 +12,16 @@ class Decision {
 public:
 	Decision(ImageProcess &img_process);
 	int GetGestureIndex() { return gestureIndex; }
-	void DecideGesture();
+	void CalculateGesture();
+	void DecideGesture(int gestureIndex);
+	Mat debug;
+	Point dbpt;
 
 private:
 	ImageProcess img_process;
 	int gestureIndex;
+
+
 };
 
 

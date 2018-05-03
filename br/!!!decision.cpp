@@ -9,18 +9,27 @@ using namespace std;
 
 Decision::Decision(ImageProcess &img_process) {
 	this->img_process = img_process;
+	debug = Mat::zeros(img_process.img_thresholded.size(), CV_8UC3);
+	dbpt.x = 10;
+	dbpt.y = 300;
+}
+void Decision::DecideGesture(int gestureIndex) {
+	string txt = to_string(gestureIndex);
+	putText(debug, txt, dbpt, FONT_HERSHEY_COMPLEX_SMALL, 1, (255, 255, 255), 2, 8);
 }
 
-void Decision::DecideGesture() {
+void Decision::CalculateGesture() {
 	gestureIndex = 0;
 	int i = img_process.IndexOfBiggestContour();
-	if (i > -1) {
+	if (img_process.isValid == true) {
+		
 		float box_ratio = ((float)img_process.GetBoundingBox()[i].height / (float)img_process.GetBoundingBox()[i].width);
 		if (img_process.GetNoOfDefects() == 0) {
 			float box_area = img_process.GetBoundingBox()[i].area();
 			float contour_area = contourArea(img_process.GetHulls()[i]);
 			float area_ratio = contour_area / box_area;
-
+			//string txt = to_string(area_ratio);
+			//putText(debug, txt, dbpt, FONT_HERSHEY_COMPLEX_SMALL, 1, (255, 255, 255), 2, 8);	
 			//if area < 50% bounding box
 			if (area_ratio < 0.5)
 			{
@@ -75,12 +84,14 @@ void Decision::DecideGesture() {
 
 		if (img_process.GetNoOfDefects() == 1) {
 			float angle = img_process.GetAngleXAxis(img_process.GetFingersPoints()[0][1], img_process.GetFingersPoints()[0][0]);
-			if (angle > 75 && angle < 105)
+			//string txt = to_string(angle);
+			//putText(debug, txt, dbpt, FONT_HERSHEY_COMPLEX_SMALL, 1, (255, 255, 255), 2, 8);			
+			if (angle > 70 && angle < 110)
 			{
 				gestureIndex = 7;
 				//putText(drawing, "THUMBS UP", pt, FONT_HERSHEY_COMPLEX_SMALL, 1, (255, 255, 255), 2, 8);
 			}
-			if (angle > 165 && angle < 195)
+			if (angle > 165 && angle < 225)
 			{
 				gestureIndex = 8;
 				//putText(drawing, "L SIGN", pt, FONT_HERSHEY_COMPLEX_SMALL, 1, (255, 255, 255), 2, 8);

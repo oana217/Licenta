@@ -3,9 +3,11 @@
 #include "opencv2/imgproc/imgproc.hpp"
 #include <opencv2/highgui/highgui.hpp>
 #include <iostream>
-
+#include <chrono>
+#include <ctime>
 using namespace cv;
 using namespace std;
+ofstream myfile("C:\\Users\\osaman\\Desktop\\example.txt");
 
 Draw::Draw(ImageProcess &img_process) {
 	 this->img_process = img_process; 
@@ -22,11 +24,12 @@ Draw::Draw(ImageProcess &img_process) {
 	 gestures.at(8) = "L SIGN";
 	 gestures.at(9) = "EXTENSION - PARTED";
 	 //gestureIndex = 0;
+
 }
 
 void Draw::DrawData() {
 	int index = img_process.IndexOfBiggestContour();
-	if (index > -1) {
+	if (img_process.isValid == true) {
 		//draw biggest contour and its hull
 		drawContours(drawing, img_process.GetContours(), index, Scalar(255, 255, 255), 2, 8, img_process.GetHierarchy(), 0, Point());
 		drawContours(drawing, img_process.GetHulls(), index, Scalar(124, 100, 233), 2, 8, vector<Vec4i>(), 0, Point());
@@ -49,6 +52,16 @@ void Draw::DrawGesture(int &gestureIndex) {
 	//draw gesture
 	Point pt(10, 300);
 	putText(drawing, gestures[gestureIndex], pt, FONT_HERSHEY_COMPLEX_SMALL, 1, (255, 255, 255), 2, 8);
+	auto start = std::chrono::system_clock::now();
+	std::time_t end_time = std::chrono::system_clock::to_time_t(start);
+	std::cout << "start : " << std::ctime(&end_time) << std::endl;
+	std::cout << "gesture : " << gestures[gestureIndex] << std::endl;
+	if (myfile.is_open())
+	{
+		myfile << "start : " << std::ctime(&end_time) << std::endl;
+		myfile << "gesture : " << gestures[gestureIndex] << std::endl;
+	}
+
 }
 
 void Draw::SetGestureIndex(int &gi) {

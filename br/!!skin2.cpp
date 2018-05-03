@@ -22,16 +22,16 @@ int main() {
 		return -1;
 	}
 
-	namedWindow("Control", CV_WINDOW_NORMAL); //create a window called "Control"
+	/*namedWindow("Control", CV_WINDOW_NORMAL); //create a window called "Control"
 
-	/*int lowY = 80;
+	int lowY = 80;
 	int highY = 179;
 
 	int lowCr = 133;
 	int highCr = 173;
 
 	int lowCb = 77;
-	int highCb = 127;*/
+	int highCb = 127;
 
 	int lowY = 0;
 	int highY = 0;
@@ -50,7 +50,7 @@ int main() {
 	cvCreateTrackbar("HighS", "Control", &highCr, 255);
 
 	cvCreateTrackbar("LowV", "Control", &lowCb, 255); //Chrominance - Blue
-	cvCreateTrackbar("HighV", "Control", &highCb, 255);
+	cvCreateTrackbar("HighV", "Control", &highCb, 255);*/
 
 	while (true)
 	{
@@ -72,8 +72,25 @@ int main() {
 		//inRange(img_converted, Scalar(0, 0, 0), Scalar(30, 255, 255), img_thresholded); //YCrCb black
 
 		cvtColor(img_raw_roi, img_converted, COLOR_BGR2YCrCb);
-		//inRange(img_converted, Scalar(80, 133, 77), Scalar(179, 173, 127), img_thresholded); //YCrCb skin												
-		inRange(img_converted, Scalar(lowY, lowCr, lowCb), Scalar(highY, highCr, highCb), img_thresholded); //controls
+		inRange(img_converted, Scalar(0, 133, 77), Scalar(255, 173, 127), img_thresholded); //YCrCb skin												
+		//inRange(img_converted, Scalar(lowY, lowCr, lowCb), Scalar(highY, highCr, highCb), img_thresholded); //controls
+
+
+		Mat channels[3];
+		split(img_converted, channels);
+		cv::imshow("y", channels[0]);
+		cv::imshow("cr", channels[1]);
+		cv::imshow("cb", channels[2]);
+		// y is channels[0], cb is channels[1], cr, well...
+
+		// some operations on channels later..
+		// once you 'fused' your luminance channels into one, you can re-assemble the image
+		// from the channels:
+
+		/*Mat new_channels[3] = { lum_fused, channels[1], channels[2] };
+
+		Mat new_ycrcb;
+		merge(new_channels, new_ycrcb, 3);*/
 
 		//morphological opening (remove small objects from the foreground)
 		erode(img_thresholded, img_thresholded, getStructuringElement(MORPH_ELLIPSE, Size(6, 6)));

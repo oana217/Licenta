@@ -38,7 +38,7 @@ void MyImage::ThresholdRawImage()
 	//convert and threshold image
 	cvtColor(img_raw_roi, img_converted, COLOR_BGR2YCrCb);
 	//YCrCb skin
-	inRange(img_converted, Scalar(0, 133, 77), Scalar(179, 173, 127), img_thresholded);												
+	inRange(img_converted, Scalar(0, 133, 77), Scalar(255, 173, 127), img_thresholded);												
 
 	//morphological opening (remove small objects from the foreground)
 	erode(img_thresholded, img_thresholded, getStructuringElement(MORPH_ELLIPSE, Size(6, 6)));
@@ -48,7 +48,3 @@ void MyImage::ThresholdRawImage()
 	dilate(img_thresholded, img_thresholded, getStructuringElement(MORPH_ELLIPSE, Size(6, 6)));
 	erode(img_thresholded, img_thresholded, getStructuringElement(MORPH_ELLIPSE, Size(6, 6)));
 }
-
-/*Size MyImage::getImgSize() {
-	return img_raw_roi.size();
-}*/
