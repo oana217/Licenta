@@ -20,8 +20,11 @@ public:
 private:
 	ImageProcess img_process;
 	int gestureIndex;
-
-
+	struct Gesture {
+		int id;
+		char command;
+	};
+	vector<Gesture> gesture;
 };
 
 

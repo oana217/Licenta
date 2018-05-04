@@ -1,5 +1,5 @@
+#include <windows.h>
 #include "!!!decision.h"
-
 #include "opencv2/imgproc/imgproc.hpp"
 #include <opencv2/highgui/highgui.hpp>
 #include <iostream>
@@ -12,10 +12,20 @@ Decision::Decision(ImageProcess &img_process) {
 	debug = Mat::zeros(img_process.img_thresholded.size(), CV_8UC3);
 	dbpt.x = 10;
 	dbpt.y = 300;
+	gesture.resize(10);
+	gesture.push_back({  3,'W' });	//New piece				W
+	gesture.push_back({  7,'Q' });	//Start Game/Game Over	Q
+	gesture.push_back({ 61,'E' });	//Rotate left			E
+	gesture.push_back({ 62,'R' });	//Rotate right			R
+	gesture.push_back({ 43,'A' });	//Translate left		A
+	gesture.push_back({ 45,'D' });	//Translate right		D
+	gesture.push_back({ 58,'S' });	//Fall one square		S
+	gesture.push_back({ 59,'X' });	//Fall down				X	
 }
 void Decision::DecideGesture(int gestureIndex) {
 	string txt = to_string(gestureIndex);
 	putText(debug, txt, dbpt, FONT_HERSHEY_COMPLEX_SMALL, 1, (255, 255, 255), 2, 8);
+	Sleep(1000);
 }
 
 void Decision::CalculateGesture() {

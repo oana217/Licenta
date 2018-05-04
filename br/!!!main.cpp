@@ -83,21 +83,25 @@ int main() {
 		}
 
 		if (first) {
-			if (gestureIndex == 3 || gestureIndex == 7) {
+			if (validGestureIndex == 3 || validGestureIndex == 7) {
 				decision.DecideGesture(gestureIndex);
+				validGestureIndex = 0;
 			}
 			else
-				if (gestureIndex == 4 || gestureIndex == 5 || gestureIndex == 6) {
+				if (validGestureIndex == 4 || validGestureIndex == 5 || validGestureIndex == 6) {
 					prevValidGestureIndex = validGestureIndex;
 					first = false;
 			}
 		}
 
 		else {
-			if (gestureIndex == 1 || gestureIndex == 2 || gestureIndex == 3 || gestureIndex == 5 || gestureIndex == 8 || gestureIndex == 9) {
+			if (validGestureIndex  == 1 || validGestureIndex  == 2 || validGestureIndex  == 3 || validGestureIndex  == 5 || validGestureIndex  == 8 || validGestureIndex  == 9) {
 				combo = prevValidGestureIndex * 10 + validGestureIndex;
-				decision.DecideGesture(gestureIndex);
+				decision.DecideGesture(combo);
+				validGestureIndex = 0;
+				prevValidGestureIndex = 0;
 				first = true;
+			}
 		}
 		//decision.DecideGesture(prevGestureIndex, gestureIndex);
 
