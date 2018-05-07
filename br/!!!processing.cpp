@@ -102,7 +102,7 @@ void ImageProcess::GetData() {
 int ImageProcess::IndexOfBiggestContour()
 {
 	int indexOfBiggestContour = -1;
-	int sizeOfBiggestContour = 0;
+	size_t sizeOfBiggestContour = 0;
 	for (int i = 0; i < contours.size(); i++) {
 		if (contours[i].size() > sizeOfBiggestContour) {
 			sizeOfBiggestContour = contours[i].size();
@@ -112,24 +112,24 @@ int ImageProcess::IndexOfBiggestContour()
 	return indexOfBiggestContour;
 }
 
-float ImageProcess::GetDistance(Point a, Point b)
+double ImageProcess::GetDistance(Point a, Point b)
 {
 	return sqrt(fabs(pow(a.x - b.x, 2) + pow(a.y - b.y, 2)));
 }
 
-float ImageProcess::GetAngle(Point s, Point f, Point e)
+double ImageProcess::GetAngle(Point s, Point f, Point e)
 {
-	float l1 = GetDistance(f, s);
-	float l2 = GetDistance(f, e);
-	float dot = (s.x - f.x)*(e.x - f.x) + (s.y - f.y)*(e.y - f.y);
-	float angle = acos(dot / (l1*l2));
+	double l1 = GetDistance(f, s);
+	double l2 = GetDistance(f, e);
+	double dot = (s.x - f.x)*(e.x - f.x) + (s.y - f.y)*(e.y - f.y);
+	double angle = acos(dot / (l1*l2));
 	angle = angle * 180 / 3.14;
 	return angle;
 }
 
-float ImageProcess::GetAngleXAxis(Point s, Point e)
+double ImageProcess::GetAngleXAxis(Point s, Point e)
 {
-	float angle = atan2(s.y - e.y, e.x - s.x);
+	double angle = atan2(s.y - e.y, e.x - s.x);
 	angle = angle * 180 / 3.14;
 	if (angle < 0) {
 		angle = angle + 360;

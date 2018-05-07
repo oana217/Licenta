@@ -27,6 +27,4 @@ private:
 	vector<Gesture> gesture;
 };
 
-
-
 #endif //!DECISION_H

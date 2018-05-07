@@ -1,3 +1,4 @@
+#define WINVER 0x0500
 #include <windows.h>
 #include "!!!decision.h"
 #include "opencv2/imgproc/imgproc.hpp"
@@ -13,19 +14,37 @@ Decision::Decision(ImageProcess &img_process) {
 	dbpt.x = 10;
 	dbpt.y = 300;
 	gesture.resize(10);
-	gesture.push_back({  3,'W' });	//New piece				W
-	gesture.push_back({  7,'Q' });	//Start Game/Game Over	Q
-	gesture.push_back({ 61,'E' });	//Rotate left			E
-	gesture.push_back({ 62,'R' });	//Rotate right			R
-	gesture.push_back({ 43,'A' });	//Translate left		A
-	gesture.push_back({ 45,'D' });	//Translate right		D
-	gesture.push_back({ 58,'S' });	//Fall one square		S
-	gesture.push_back({ 59,'X' });	//Fall down				X	
+	gesture.push_back({  3,'W' });	//New piece				W 0x57
+	gesture.push_back({  7,'Q' });	//Start Game/Game Over	Q 0x51
+	gesture.push_back({ 61,'E' });	//Rotate left			E 0x45
+	gesture.push_back({ 62,'R' });	//Rotate right			R 0x52
+	gesture.push_back({ 43,'A' });	//Translate left		A 0x41
+	gesture.push_back({ 45,'D' });	//Translate right		D 0x44
+	gesture.push_back({ 58,'S' });	//Fall one square		S 0x53
+	gesture.push_back({ 59,'X' });	//Fall down				X 0x58	
 }
+
 void Decision::DecideGesture(int gestureIndex) {
 	string txt = to_string(gestureIndex);
 	putText(debug, txt, dbpt, FONT_HERSHEY_COMPLEX_SMALL, 1, (255, 255, 255), 2, 8);
-	Sleep(1000);
+	INPUT ip;
+
+	// Set up a generic keyboard event.
+	ip.type = INPUT_KEYBOARD;
+	ip.ki.wScan = 0; // hardware scan code for key
+	ip.ki.time = 0;
+	ip.ki.dwExtraInfo = 0;
+
+	// Press the "UP" key
+	ip.ki.wVk = 0x26; // virtual-key code for the "UP" key
+	ip.ki.dwFlags = 0; // 0 for key press
+	SendInput(1, &ip, sizeof(INPUT));
+	// Pause for 1 second.
+	Sleep(500);
+	// Release the "UP" key
+	ip.ki.dwFlags = KEYEVENTF_KEYUP; // KEYEVENTF_KEYUP for key release
+	SendInput(1, &ip, sizeof(INPUT));
+	//Sleep(1000);
 }
 
 void Decision::CalculateGesture() {
@@ -35,9 +54,9 @@ void Decision::CalculateGesture() {
 		
 		float box_ratio = ((float)img_process.GetBoundingBox()[i].height / (float)img_process.GetBoundingBox()[i].width);
 		if (img_process.GetNoOfDefects() == 0) {
-			float box_area = img_process.GetBoundingBox()[i].area();
-			float contour_area = contourArea(img_process.GetHulls()[i]);
-			float area_ratio = contour_area / box_area;
+			int box_area = img_process.GetBoundingBox()[i].area();
+			double contour_area = contourArea(img_process.GetHulls()[i]);
+			double  area_ratio = contour_area / box_area;
 			//string txt = to_string(area_ratio);
 			//putText(debug, txt, dbpt, FONT_HERSHEY_COMPLEX_SMALL, 1, (255, 255, 255), 2, 8);	
 			//if area < 50% bounding box
@@ -93,7 +112,7 @@ void Decision::CalculateGesture() {
 		}
 
 		if (img_process.GetNoOfDefects() == 1) {
-			float angle = img_process.GetAngleXAxis(img_process.GetFingersPoints()[0][1], img_process.GetFingersPoints()[0][0]);
+			double angle = img_process.GetAngleXAxis(img_process.GetFingersPoints()[0][1], img_process.GetFingersPoints()[0][0]);
 			//string txt = to_string(angle);
 			//putText(debug, txt, dbpt, FONT_HERSHEY_COMPLEX_SMALL, 1, (255, 255, 255), 2, 8);			
 			if (angle > 70 && angle < 110)

@@ -27,9 +27,9 @@ public:
 	vector<vector<Point>> GetFingersPoints() { return fingers_points; }
 	vector<Rect> GetBoundingBox() { return boundRect; }
 
-	float GetDistance(Point a, Point b);
-	float GetAngle(Point s, Point f, Point e);
-	float GetAngleXAxis(Point s, Point e);
+	double GetDistance(Point a, Point b);
+	double GetAngle(Point s, Point f, Point e);
+	double GetAngleXAxis(Point s, Point e);
 	bool isValid = false;
 	
 private:

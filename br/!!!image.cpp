@@ -18,6 +18,8 @@ bool MyImage::ImageFromCamera()
 		cout << "Could not read from camera." << endl;
 		return false;
 	}
+	else
+		return true;
 }
 
 void MyImage::ROI()

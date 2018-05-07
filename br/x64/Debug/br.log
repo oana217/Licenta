@@ -1,5 +1,2 @@
-﻿  !!!decision.cpp
-c:\users\osaman\documents\visual studio 2015\projects\licenta\br\!!!decision.cpp(29): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
-c:\users\osaman\documents\visual studio 2015\projects\licenta\br\!!!decision.cpp(30): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
-  br.vcxproj -> C:\Users\osaman\Documents\Visual Studio 2015\Projects\Licenta\x64\Debug\br.exe
+﻿  br.vcxproj -> C:\Users\osaman\Documents\Visual Studio 2015\Projects\Licenta\x64\Debug\br.exe
   br.vcxproj -> C:\Users\osaman\Documents\Visual Studio 2015\Projects\Licenta\x64\Debug\br.pdb (Full PDB)
