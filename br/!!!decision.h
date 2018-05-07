@@ -25,6 +25,8 @@ private:
 		char command;
 	};
 	vector<Gesture> gesture;
+	void GenerateCommand(int command);
+	INPUT ip;
 };
 
 #endif //!DECISION_H

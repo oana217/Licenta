@@ -28,26 +28,6 @@ int main() {
 	img.SetCamera(camera);
 
 	while (true) {
-		/*INPUT ip;
-
-		// Pause for 1 second.
-		Sleep(1000);
-
-		// Set up a generic keyboard event.
-		ip.type = INPUT_KEYBOARD;
-		ip.ki.wScan = 0; // hardware scan code for key
-		ip.ki.time = 0;
-		ip.ki.dwExtraInfo = 0;
-
-		// Press the "UP" key
-		ip.ki.wVk = 0x26; // virtual-key code for the "UP" key
-		ip.ki.dwFlags = 0; // 0 for key press
-		SendInput(1, &ip, sizeof(INPUT));
-
-		// Release the "UP" key
-		ip.ki.dwFlags = KEYEVENTF_KEYUP; // KEYEVENTF_KEYUP for key release
-		SendInput(1, &ip, sizeof(INPUT));*/
-
 		img.Setup();
 		Mat img_roi = img.GetROI();
 		Mat img_converted = img.GetConvertedImage(); //these are just for imshow
@@ -76,10 +56,8 @@ int main() {
 			count = 0;
 		}
 		if (count == 48) {
-			//img_draw.SetGestureIndex(gestureIndex);
 			validGestureIndex = gestureIndex;
 			count = 0;
-			//Sleep(1000); 
 		}
 
 		if (first) {
@@ -95,7 +73,7 @@ int main() {
 		}
 
 		else {
-			if (validGestureIndex  == 1 || validGestureIndex  == 2 || validGestureIndex  == 3 || validGestureIndex  == 5 || validGestureIndex  == 8 || validGestureIndex  == 9) {
+			if ((prevValidGestureIndex != 5) && (validGestureIndex  == 1 || validGestureIndex  == 2 || validGestureIndex  == 3 || validGestureIndex  == 5 || validGestureIndex  == 8 || validGestureIndex  == 9)) {
 				combo = prevValidGestureIndex * 10 + validGestureIndex;
 				decision.DecideGesture(combo);
 				validGestureIndex = 0;
@@ -103,8 +81,6 @@ int main() {
 				first = true;
 			}
 		}
-		//decision.DecideGesture(prevGestureIndex, gestureIndex);
-
 
 		//draw progress line
 		p2.x = count * 6;

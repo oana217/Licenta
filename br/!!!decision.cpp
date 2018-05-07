@@ -13,30 +13,36 @@ Decision::Decision(ImageProcess &img_process) {
 	debug = Mat::zeros(img_process.img_thresholded.size(), CV_8UC3);
 	dbpt.x = 10;
 	dbpt.y = 300;
-	gesture.resize(10);
-	gesture.push_back({  3,'W' });	//New piece				W 0x57
-	gesture.push_back({  7,'Q' });	//Start Game/Game Over	Q 0x51
-	gesture.push_back({ 61,'E' });	//Rotate left			E 0x45
-	gesture.push_back({ 62,'R' });	//Rotate right			R 0x52
-	gesture.push_back({ 43,'A' });	//Translate left		A 0x41
-	gesture.push_back({ 45,'D' });	//Translate right		D 0x44
-	gesture.push_back({ 58,'S' });	//Fall one square		S 0x53
-	gesture.push_back({ 59,'X' });	//Fall down				X 0x58	
+	gesture.resize(8);
+	gesture.push_back({  3, 0x57 });	//New piece				W 0x57
+	gesture.push_back({  7, 0x51 });	//Start Game/Game Over	Q 0x51
+	gesture.push_back({ 61, 0x45 });	//Rotate left			E 0x45
+	gesture.push_back({ 62, 0x52 });	//Rotate right			R 0x52
+	gesture.push_back({ 43, 0x41 });	//Translate left		A 0x41
+	gesture.push_back({ 45, 0x44 });	//Translate right		D 0x44
+	gesture.push_back({ 58, 0x53 });	//Fall one square		S 0x53
+	gesture.push_back({ 59, 0x58 });	//Fall down				X 0x58	
 }
 
 void Decision::DecideGesture(int gestureIndex) {
 	string txt = to_string(gestureIndex);
 	putText(debug, txt, dbpt, FONT_HERSHEY_COMPLEX_SMALL, 1, (255, 255, 255), 2, 8);
-	INPUT ip;
+	for (int i = 0; i < gesture.size(); i++) {
+		if (gesture[i].id == gestureIndex) {
+			GenerateCommand(gesture[i].command);
+		}
+	}
+}
 
+void Decision::GenerateCommand(int cmd) {
 	// Set up a generic keyboard event.
 	ip.type = INPUT_KEYBOARD;
 	ip.ki.wScan = 0; // hardware scan code for key
 	ip.ki.time = 0;
 	ip.ki.dwExtraInfo = 0;
 
-	// Press the "UP" key
-	ip.ki.wVk = 0x26; // virtual-key code for the "UP" key
+	// Press key
+	ip.ki.wVk = cmd; // virtual-key code for the key
 	ip.ki.dwFlags = 0; // 0 for key press
 	SendInput(1, &ip, sizeof(INPUT));
 	// Pause for 1 second.
