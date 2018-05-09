@@ -58,27 +58,28 @@ int main() {
 		if (count == 48) {
 			validGestureIndex = gestureIndex;
 			count = 0;
-		}
 
-		if (first) {
-			if (validGestureIndex == 3 || validGestureIndex == 7) {
-				decision.DecideGesture(gestureIndex);
-				validGestureIndex = 0;
-			}
-			else
-				if (validGestureIndex == 4 || validGestureIndex == 5 || validGestureIndex == 6) {
-					prevValidGestureIndex = validGestureIndex;
-					first = false;
-			}
-		}
 
-		else {
-			if ((prevValidGestureIndex != 5) && (validGestureIndex  == 1 || validGestureIndex  == 2 || validGestureIndex  == 3 || validGestureIndex  == 5 || validGestureIndex  == 8 || validGestureIndex  == 9)) {
-				combo = prevValidGestureIndex * 10 + validGestureIndex;
-				decision.DecideGesture(combo);
-				validGestureIndex = 0;
-				prevValidGestureIndex = 0;
-				first = true;
+			if (first) {
+				if (validGestureIndex == 3 || validGestureIndex == 7) {
+					decision.DecideGesture(gestureIndex);
+					validGestureIndex = 0;
+				}
+				else
+					if (validGestureIndex == 4 || validGestureIndex == 5 || validGestureIndex == 6) {
+						prevValidGestureIndex = validGestureIndex;
+						first = false;
+					}
+			}
+
+			else {
+				//if ( (validGestureIndex == 1 || validGestureIndex == 2 || validGestureIndex == 3 || validGestureIndex == 5 || validGestureIndex == 8 || validGestureIndex == 9)) {
+					combo = prevValidGestureIndex * 10 + validGestureIndex;
+					decision.DecideGesture(combo);
+					validGestureIndex = 0;
+					prevValidGestureIndex = 0;
+					first = true;
+				//}
 			}
 		}
 
