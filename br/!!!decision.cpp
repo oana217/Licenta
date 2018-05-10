@@ -32,6 +32,21 @@ void Decision::DecideGesture(int gestureIndex) {
 			GenerateCommand(gesture[i].command);
 		}
 	}
+
+	/*ip.type = INPUT_KEYBOARD;
+	ip.ki.wScan = 0; // hardware scan code for key
+	ip.ki.time = 0;
+	ip.ki.dwExtraInfo = 0;
+
+	// Press key
+	ip.ki.wVk = 0x26; // virtual-key code for the key
+	ip.ki.dwFlags = 0; // 0 for key press
+	SendInput(1, &ip, sizeof(INPUT));
+	// Pause for 1 second.
+	Sleep(500);
+	// Release the "UP" key
+	ip.ki.dwFlags = KEYEVENTF_KEYUP; // KEYEVENTF_KEYUP for key release
+	SendInput(1, &ip, sizeof(INPUT));*/
 }
 
 void Decision::GenerateCommand(int cmd) {

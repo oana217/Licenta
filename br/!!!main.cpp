@@ -55,7 +55,7 @@ int main() {
 			validGestureIndex = 0;
 			count = 0;
 		}
-		if (count == 48) {
+		if (count == 32) {
 			validGestureIndex = gestureIndex;
 			count = 0;
 
@@ -84,9 +84,11 @@ int main() {
 		}
 
 		//draw progress line
-		p2.x = count * 6;
+		p2.x = count * 9;
 		line(img_roi, p1, p2, Scalar(0, 255, 0), 3, 8);
-
+		if (p2.x >= 31 * 9) {
+			line(img_roi, p1, p2, Scalar(0, 0, 255), 3, 8);
+		}
 		//draw gesture name
 		img_draw.DrawGesture(gestureIndex);
 		//img_draw.DrawGesture(validGestureIndex);
