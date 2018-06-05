@@ -36,6 +36,9 @@ void MyImage::Setup() {
 void MyImage::ThresholdRawImage() 
 {
 	blur(img_raw_roi, img_raw_roi, Size(3, 3));
+	//GaussianBlur(img_raw_roi, img_raw_roi, Size(3, 3), 0, 0);
+	//medianBlur(img_raw_roi, img_raw_roi, 9);
+	//bilateralFilter(img_raw_roi, img_raw_roi, 3, 3 * 2,3/2);
 
 	//convert and threshold image
 	cvtColor(img_raw_roi, img_converted, COLOR_BGR2YCrCb);

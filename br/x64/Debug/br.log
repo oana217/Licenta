@@ -1,2 +1,4 @@
-﻿  br.vcxproj -> C:\Users\osaman\Documents\visual studio 2015\Projects\Licenta\x64\Debug\br.exe
+﻿  !!!image.cpp
+c:\users\osaman\documents\visual studio 2015\projects\licenta\br\!!!image.cpp(27): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+  br.vcxproj -> C:\Users\osaman\Documents\visual studio 2015\Projects\Licenta\x64\Debug\br.exe
   br.vcxproj -> C:\Users\osaman\Documents\visual studio 2015\Projects\Licenta\x64\Debug\br.pdb (Full PDB)
